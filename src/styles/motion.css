@@ -1,0 +1,151 @@
+/* ==========================================================================
+   MOTION, ACCESSIBILITY FALLBACKS & RESPONSIVE
+   ========================================================================== */
+
+/* Without JS everything must still be visible */
+html:not(.js) [data-reveal] { opacity: 1 !important; transform: none !important; }
+html:not(.js) .overlay-nav,
+html:not(.js) .nav__toggle { display: none; }
+html:not(.js) .hero__mesh { display: none; }
+
+/* ==========================================================================
+   RESPONSIVE — mobile-first, deliberately designed at every step
+   ========================================================================== */
+
+/* ---------- Small phones ---------- */
+@media (max-width: 420px) {
+  :root { --nav-h: 62px; }
+  .brand__sub { display: none; }
+  .hero__cta .btn { width: 100%; }
+  .hero__cta .link-arrow { width: 100%; justify-content: space-between; }
+  .stack__layer { flex-direction: column; gap: 0.2rem; }
+  .eco__node { padding: 1rem 1.1rem; }
+}
+
+/* ---------- Two-column content from 640px ---------- */
+@media (min-width: 640px) {
+  .hero__badges { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .labgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .osworlds { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hobbies { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ev__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer__nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  h2 br { display: inline; }
+}
+
+@media (min-width: 720px) {
+  .eco__row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .arch__flow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .philosophy__creed { gap: 0.25rem; }
+  .horizons { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .principles__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2.5rem; }
+  .contactcats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Tablet / small desktop ---------- */
+@media (max-width: 1059px) {
+  .nav__links { display: none; }
+  .nav__toggle { display: inline-flex; }
+  .nav__links + .nav__actions { margin-left: auto; }
+  .nav__inner { gap: 1rem; }
+  .nav__links { margin-left: 0; }
+  .brand { margin-right: auto; }
+}
+
+@media (min-width: 900px) {
+  .hero__lede { font-size: var(--step-1); }
+  .hero__badges { max-width: 980px; }
+  .labgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .techgrid { grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); }
+  .ev__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .evbar { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 2rem; }
+  .hobbies { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1000px) {
+  .about { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+  .eco { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: start; }
+  .product { grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); align-items: start; }
+  .aios { grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr); align-items: start; }
+  .wealth { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .homelab { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); align-items: start; }
+  .product__aside { position: sticky; top: calc(var(--nav-h) + 28px); }
+  .map { grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr); align-items: start; }
+  .map__panel { position: sticky; top: calc(var(--nav-h) + 28px); }
+  .contactcard { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+  .contactcard__side { border-top: 0; border-left: 1px solid var(--line); }
+  .footer__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); align-items: start; }
+  .contactcats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .osgrid { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+  .philosophy__creed { font-size: var(--step-5); }
+  .hero__inner { max-width: var(--shell-wide); }
+  .hero__lede { max-width: 48ch; }
+}
+
+@media (min-width: 1160px) {
+  .osworlds { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .labcard--wide { grid-column: span 2; }
+  .nav__links a { padding-inline: 0.85rem; font-size: 0.82rem; }
+  .evbar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1400px) {
+  :root { --shell: 1300px; }
+  .labgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .labcard--wide { grid-column: span 1; }
+}
+
+/* ---------- Short viewports (landscape phones) ---------- */
+@media (max-height: 620px) and (min-width: 700px) {
+  .hero { min-height: auto; padding-block: calc(var(--nav-h) + 2.5rem) 3rem; }
+  .hero__scroll { display: none; }
+}
+
+/* ---------- Anchor offset for the sticky header ---------- */
+[id] { scroll-margin-top: calc(var(--nav-h) + 18px); }
+
+/* ==========================================================================
+   REDUCED MOTION — OS preference and in-page toggle
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .ticker__track { animation: none; }
+  .hero__media img { transform: none; }
+}
+
+html.reduce-motion { scroll-behavior: auto; }
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+html.reduce-motion [data-reveal] { opacity: 1 !important; transform: none !important; }
+html.reduce-motion .ticker__track { animation: none; }
+html.reduce-motion .hero__mesh { display: none; }
+
+.motiontoggle {
+  font-size: 0.76rem; color: var(--text-4);
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  transition: color var(--dur-1), border-color var(--dur-1);
+}
+.motiontoggle:hover { color: var(--text-2); border-color: var(--line-mid); }
+.motiontoggle[aria-pressed="true"] { color: var(--teal); border-color: rgba(53,230,208,.32); }
+
+/* ==========================================================================
+   FORCED COLORS
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .btn, .chip, .panel, .labcard, .projcard, .hero-card, .evcard { border: 1px solid ButtonBorder; }
+  .status { border: 1px solid ButtonBorder; }
+}

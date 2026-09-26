@@ -1,0 +1,14 @@
+{
+  "name": "George S. Thomas — Digital Headquarters",
+  "short_name": "George S. Thomas",
+  "description": "Entrepreneur, business owner and technology enthusiast building NKT Group, THOMU LAB, Apex Creator OS and My_AI_OS.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04060A",
+  "theme_color": "#04060A",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

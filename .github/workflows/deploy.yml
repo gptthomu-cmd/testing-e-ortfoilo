@@ -1,0 +1,80 @@
+name: Build, verify and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Regenerate images and icons
+        run: npm run images:build
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Build the static export
+        env:
+          # Repository name drives the GitHub Pages path prefix.
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+          # Optional secrets — set them in Settings → Secrets and variables → Actions.
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+          NEXT_PUBLIC_GSC_VERIFICATION: ${{ vars.NEXT_PUBLIC_GSC_VERIFICATION }}
+        run: npm run build:pages
+
+      - name: SEO and quality gate
+        run: npm run seo:check
+
+      - name: Confirm the export is complete
+        run: |
+          test -f out/index.html
+          test -f out/404.html
+          test -f out/sitemap.xml
+          test -f out/robots.txt
+          test -f out/feed.xml
+          test -f out/.nojekyll
+          echo "export looks complete"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          # Enables GitHub Pages (build type: workflow) on the first run, so the
+          # deploy does not fail while Settings → Pages is still unset.
+          enablement: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

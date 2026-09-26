@@ -1,0 +1,138 @@
+{
+  "$comment": "One Open Graph / social card per indexable page. Rendered by scripts/generate-images.mjs. Keep `out` in sync with the page's metadata ogImage path.",
+  "cards": [
+    {
+      "out": "/images/og/og-default.jpg",
+      "eyebrow": "George S. Thomas · Thomu",
+      "title": "Operator, builder, digital architect",
+      "subtitle": "NKT Group ventures, EV charging infrastructure and AI systems — Thodupuzha, Kerala.",
+      "footer": "Home"
+    },
+    {
+      "out": "/images/og/og-about.jpg",
+      "eyebrow": "Profile",
+      "title": "About George S. Thomas",
+      "subtitle": "Operator of the Nedumpurath Group (NKT Group), builder of systems and student of the trade.",
+      "footer": "/about/"
+    },
+    {
+      "out": "/images/og/og-work.jpg",
+      "eyebrow": "Projects",
+      "title": "THOMU LAB, Apex Creator OS, My_AI_OS",
+      "subtitle": "Engineering, creator systems and AI tooling built and documented in public.",
+      "footer": "/work/"
+    },
+    {
+      "out": "/images/og/og-thomu-lab.jpg",
+      "eyebrow": "Project · THOMU LAB",
+      "title": "A research lab for storage, edge and energy",
+      "subtitle": "ZFS arrays, Raspberry Pi telemetry nodes and local AI agents in Kerala.",
+      "footer": "/work/thomu-lab/"
+    },
+    {
+      "out": "/images/og/og-apex-creator-os.jpg",
+      "eyebrow": "Project · Apex Creator OS",
+      "title": "Shoot to publish, without the chaos",
+      "subtitle": "A repeatable creator workflow: ingest, edit, grade, deliver, archive.",
+      "footer": "/work/apex-creator-os/"
+    },
+    {
+      "out": "/images/og/og-my-ai-os.jpg",
+      "eyebrow": "Project · My_AI_OS",
+      "title": "A personal AI operating system",
+      "subtitle": "Agent roles, a memory vault and review gates for building software solo.",
+      "footer": "/work/my-ai-os/"
+    },
+    {
+      "out": "/images/og/og-ventures.jpg",
+      "eyebrow": "Organization · NKT Group",
+      "title": "Four generations of enterprise in Idukki",
+      "subtitle": "NKT Vessels House, Nedumpurath Towers and NKT Charge Hub.",
+      "footer": "/ventures/"
+    },
+    {
+      "out": "/images/og/og-nkt-charge-hub.jpg",
+      "eyebrow": "NKT Charge Hub · Launching 2026",
+      "title": "Public DC fast charging in Thodupuzha",
+      "subtitle": "Run by NKT Group, supported by IonGrid as technology and network partner.",
+      "footer": "/ventures/nkt-charge-hub/"
+    },
+    {
+      "out": "/images/og/og-nkt-vessels-house.jpg",
+      "eyebrow": "Venture · NKT Vessels House",
+      "title": "Retail trade since 1947",
+      "subtitle": "The brassware and household storefront where the Nedumpurath Group began.",
+      "footer": "/ventures/nkt-vessels-house/"
+    },
+    {
+      "out": "/images/og/og-nedumpurath-towers.jpg",
+      "eyebrow": "Venture · Nedumpurath Towers",
+      "title": "Commercial property in Thodupuzha",
+      "subtitle": "The real-estate arm of the group, anchoring four leased units.",
+      "footer": "/ventures/nedumpurath-towers/"
+    },
+    {
+      "out": "/images/og/og-blog.jpg",
+      "eyebrow": "Writing",
+      "title": "Field notes on infrastructure and systems",
+      "subtitle": "EV charging, homelab storage, creator workflows and building with AI agents.",
+      "footer": "/blog/"
+    },
+    {
+      "out": "/images/og/og-thodupuzha-dc-fast-charger.jpg",
+      "eyebrow": "Writing · Infrastructure",
+      "title": "Why Thodupuzha needed a DC fast charger",
+      "subtitle": "Highway corridors got chargers first. The towns in between got skipped.",
+      "footer": "/blog/"
+    },
+    {
+      "out": "/images/og/og-zfs-homelab-monsoon.jpg",
+      "eyebrow": "Writing · Systems",
+      "title": "Running a ZFS homelab through a monsoon",
+      "subtitle": "Humidity, load shedding and the backups that actually matter.",
+      "footer": "/blog/"
+    },
+    {
+      "out": "/images/og/og-shipping-with-ai-agents.jpg",
+      "eyebrow": "Writing · Engineering",
+      "title": "Review gates that make AI agents trustworthy",
+      "subtitle": "Agentic coding fails quietly. Here is what catches it.",
+      "footer": "/blog/"
+    },
+    {
+      "out": "/images/og/og-contact.jpg",
+      "eyebrow": "Contact",
+      "title": "Let's build something tangible",
+      "subtitle": "Selected collaborations, engineering questions and press enquiries.",
+      "footer": "/contact/"
+    },
+    {
+      "out": "/images/og/og-privacy-policy.jpg",
+      "eyebrow": "Legal",
+      "title": "Privacy Policy",
+      "subtitle": "What is collected, why, and the rights you can exercise.",
+      "footer": "/privacy-policy/"
+    },
+    {
+      "out": "/images/og/og-terms.jpg",
+      "eyebrow": "Legal",
+      "title": "Terms of Use & Disclaimer",
+      "subtitle": "Informational content only — including the financial disclaimer.",
+      "footer": "/terms/"
+    },
+    {
+      "out": "/images/og/og-cookies.jpg",
+      "eyebrow": "Legal",
+      "title": "Cookie & Privacy Controls",
+      "subtitle": "Every cookie this site can set, with working consent controls.",
+      "footer": "/cookies/"
+    },
+    {
+      "out": "/images/og/og-404.jpg",
+      "eyebrow": "Error 404",
+      "title": "That page moved or never existed",
+      "subtitle": "Try the search-friendly route index instead.",
+      "footer": "/404/"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+name: Build and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      pages_enabled: ${{ steps.pages.outputs.enabled }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The site is a static export, so the build is deterministic and needs no
+      # committed image pipeline. Base path and absolute origin are injected here
+      # rather than committed, so the same source deploys correctly to either a
+      # project Pages URL or a custom domain.
+      - name: Build
+        env:
+          SITE_BASE: /${{ github.event.repository.name }}/
+          # Full origin *and* project path, so canonical tags, Open Graph URLs
+          # and sitemap entries all point at the real deployed address.
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: npm run build
+
+      - name: Confirm the export is complete
+        run: |
+          set -euo pipefail
+          for file in index.html favicon.svg site.webmanifest robots.txt sitemap.xml \
+                      llms.txt apple-touch-icon.png \
+                      fonts/sora-var-latin.woff2 fonts/inter-var-latin.woff2 \
+                      img/hero-atmosphere.webp img/og-cover.jpg \
+                      img/brand/nkt-group-logo-256.png; do
+            test -f "dist/$file" || { echo "::error::missing dist/$file"; exit 1; }
+          done
+          if grep -q "${{ github.event.repository.name }}/img/hero" dist/index.html; then
+            echo "base path applied correctly"
+          else
+            echo "::error::base path was not applied — assets will 404 on a project Pages URL"
+            exit 1
+          fi
+
+      - name: Check whether GitHub Pages is enabled
+        id: pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Enabling Pages for the first time needs repository admin rights, which
+          # the workflow token does not have. Detect the state instead of failing a
+          # green build: Settings → Pages → Source: GitHub Actions, once.
+          if gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "GitHub Pages is enabled — the export will be deployed."
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Pages not enabled::Build passed, nothing deployed. Enable once: Settings → Pages → Source: GitHub Actions."
+          fi
+
+      - name: Configure Pages
+        if: steps.pages.outputs.enabled == 'true'
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload the Pages artifact
+        if: steps.pages.outputs.enabled == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.pages_enabled == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

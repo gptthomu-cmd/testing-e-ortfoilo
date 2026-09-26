@@ -17,6 +17,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Exposed so the deploy job can tell "nothing to deploy yet" apart from a
+    # genuine failure.
+    outputs:
+      pages_enabled: ${{ steps.pages.outputs.enabled }}
     steps:
       - name: Check out the repository
         uses: actions/checkout@v7
@@ -79,15 +83,40 @@ jobs:
           echo "image assets: $(find out/images -type f | wc -l) files"
           echo "export looks complete"
 
+      - name: Check whether GitHub Pages is enabled
+        id: pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Enabling Pages for the first time requires repository admin rights,
+          # which neither the workflow token nor an app installation token has:
+          # POST /repos/{owner}/{repo}/pages returns 403 "Resource not accessible
+          # by integration". It is a one-click browser action in
+          # Settings → Pages → Source: GitHub Actions.
+          #
+          # So instead of letting the workflow fail on a configuration state
+          # rather than a code problem, detect it: build and verification always
+          # run and report, and deployment is skipped with an explicit warning
+          # until Pages is switched on.
+          if gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "GitHub Pages is enabled — the export will be deployed."
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Pages not enabled::Build and verification passed, but nothing was deployed. Enable Pages once: Settings → Pages → Source: GitHub Actions. The next push to main (or a manual re-run) will then publish the site."
+          fi
+
       - name: Configure Pages
+        if: steps.pages.outputs.enabled == 'true'
         uses: actions/configure-pages@v6
         with:
-          # Enables GitHub Pages (build type: workflow) on the first run, so the
-          # deploy does not fail while Settings → Pages is still unset.
+          # Handles the case where Pages exists but is still set to "deploy from
+          # a branch" rather than "GitHub Actions".
           enablement: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload the Pages artifact
+        if: steps.pages.outputs.enabled == 'true'
         uses: actions/upload-pages-artifact@v5
         with:
           path: out
@@ -96,6 +125,8 @@ jobs:
 
   deploy:
     needs: build
+    # Skipped (not failed) until Pages is enabled, so a green build stays green.
+    if: needs.build.outputs.pages_enabled == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

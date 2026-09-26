@@ -22,13 +22,19 @@ npm run build:pages      # NEXT_PUBLIC_BASE_PATH=/testing-e-ortfoilo next build
 
 `.github/workflows/deploy.yml` builds and publishes on every push to `main`. One-time setup:
 
-1. Repository → **Settings → Pages**.
-2. **Source:** *GitHub Actions* — or leave it unset: the workflow calls
-   `actions/configure-pages` with `enablement: true`, which creates the Pages site on the first
-   run using the workflow token.
-3. Push to `main`. The workflow runs `npm ci`, type-checks, builds with the base path, runs the
+1. Repository → **Settings → Pages** → **Source: GitHub Actions**.
+
+   This one step has to be done in the browser by someone with admin rights on the repository.
+   It cannot be automated: creating a Pages site for the first time requires repository admin
+   permission, and neither the workflow's `GITHUB_TOKEN` nor an app installation token has it
+   (`POST /repos/{owner}/{repo}/pages` returns *403 Resource not accessible by integration*).
+
+2. Push to `main`. The workflow runs `npm ci`, type-checks, builds with the base path, runs the
    SEO gate, verifies the export, then uploads `out/` as the Pages artefact and deploys it.
-4. Check **Settings → Pages** for the published URL, then tick **Enforce HTTPS**.
+
+   If Pages is not enabled yet, the build and verification still run and pass, and the deploy is
+   **skipped with a warning** rather than failing — the run tells you exactly what to switch on.
+3. Check **Settings → Pages** for the published URL, then tick **Enforce HTTPS**.
 
 The workflow runs `npm run seo:check` before deploying, so a page with a missing canonical, a
 duplicate title, a broken internal link, a missing image or invalid structured data **cannot**

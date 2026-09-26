@@ -57,7 +57,13 @@ jobs:
           test -f out/.nojekyll
           echo "export looks complete"
 
-      - uses: actions/configure-pages@v5
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          # Enables GitHub Pages (build type: workflow) on the first run, so the
+          # deploy does not fail while Settings → Pages is still unset.
+          enablement: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

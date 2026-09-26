@@ -36,8 +36,13 @@ export function initNav() {
   onScroll();
 
   /* ---------- scroll spy ---------- */
+  // Only in-page anchors take part in the scroll spy; links to other pages
+  // would throw on querySelector('/about/').
   const sections = links
-    .map((a) => document.querySelector(a.getAttribute('href')))
+    .map((a) => {
+      const href = a.getAttribute('href') || '';
+      return href.startsWith('#') && href.length > 1 ? document.querySelector(href) : null;
+    })
     .filter(Boolean);
 
   if (sections.length && 'IntersectionObserver' in window) {

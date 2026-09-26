@@ -18,9 +18,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out the repository
+        uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - name: Set up Node
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -28,8 +30,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Regenerate images and icons
-        run: npm run images:build
+      # ---------------------------------------------------------------------
+      #  Artwork is deliberately NOT regenerated here.
+      #
+      #  Everything in public/images, the favicons and the Open Graph cards is
+      #  committed to the repository, because that is exactly what was reviewed
+      #  in the pull request. Regenerating it during deploy would mean shipping
+      #  brand assets that nobody looked at, and that can differ between
+      #  ImageMagick builds.
+      #
+      #  It would also break: ImageMagick is no longer part of the
+      #  ubuntu-latest runner image (it shipped on 22.04, not on 24.04), so
+      #  `convert` is simply not available. Run `npm run images:build` locally
+      #  when masters or OG copy change, and commit the result.
+      #
+      #  `npm run seo:check` below fails the build if any page references an
+      #  image that is missing from the export, so committed assets are still
+      #  verified end to end.
+      # ---------------------------------------------------------------------
 
       - name: Type check
         run: npm run typecheck
@@ -39,7 +57,7 @@ jobs:
           # Repository name drives the GitHub Pages path prefix.
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
-          # Optional secrets — set them in Settings → Secrets and variables → Actions.
+          # Optional values — set them in Settings → Secrets and variables → Actions → Variables.
           NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
           NEXT_PUBLIC_GSC_VERIFICATION: ${{ vars.NEXT_PUBLIC_GSC_VERIFICATION }}
         run: npm run build:pages
@@ -49,25 +67,32 @@ jobs:
 
       - name: Confirm the export is complete
         run: |
-          test -f out/index.html
-          test -f out/404.html
-          test -f out/sitemap.xml
-          test -f out/robots.txt
-          test -f out/feed.xml
-          test -f out/.nojekyll
+          set -euo pipefail
+          for file in index.html 404.html sitemap.xml robots.txt feed.xml site.webmanifest favicon.ico apple-touch-icon.png .nojekyll; do
+            test -f "out/$file" || { echo "::error::missing out/$file"; exit 1; }
+          done
+          for file in images/brand/nkt-group-logo-512.png images/brand/site-icon-192.png \
+                      images/profile/george-s-thomas-960.jpg images/og/og-default.jpg \
+                      images/generated/rack-diagram.svg icons/maskable-512.png; do
+            test -f "out/$file" || { echo "::error::missing committed asset out/$file — run 'npm run images:build' locally"; exit 1; }
+          done
+          echo "image assets: $(find out/images -type f | wc -l) files"
           echo "export looks complete"
 
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
         with:
           # Enables GitHub Pages (build type: workflow) on the first run, so the
           # deploy does not fail while Settings → Pages is still unset.
           enablement: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload the Pages artifact
+        uses: actions/upload-pages-artifact@v5
         with:
           path: out
+          # .nojekyll is a dotfile; without this it would be excluded.
+          include-hidden-files: true
 
   deploy:
     needs: build
@@ -76,5 +101,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

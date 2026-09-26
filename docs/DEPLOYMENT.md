@@ -23,13 +23,29 @@ npm run build:pages      # NEXT_PUBLIC_BASE_PATH=/testing-e-ortfoilo next build
 `.github/workflows/deploy.yml` builds and publishes on every push to `main`. One-time setup:
 
 1. Repository → **Settings → Pages**.
-2. **Source:** *GitHub Actions*.
-3. Push to `main`. The workflow runs `npm ci`, builds with the base path, runs the SEO gate and
-   uploads `out/` as the Pages artefact.
+2. **Source:** *GitHub Actions* — or leave it unset: the workflow calls
+   `actions/configure-pages` with `enablement: true`, which creates the Pages site on the first
+   run using the workflow token.
+3. Push to `main`. The workflow runs `npm ci`, type-checks, builds with the base path, runs the
+   SEO gate, verifies the export, then uploads `out/` as the Pages artefact and deploys it.
 4. Check **Settings → Pages** for the published URL, then tick **Enforce HTTPS**.
 
 The workflow runs `npm run seo:check` before deploying, so a page with a missing canonical, a
-duplicate title, a broken internal link or invalid structured data **cannot** reach production.
+duplicate title, a broken internal link, a missing image or invalid structured data **cannot**
+reach production.
+
+### Why CI does not regenerate images
+
+`npm run images:build` needs ImageMagick, which **is no longer installed on the `ubuntu-latest`
+runner image** — it was present on Ubuntu 22.04 but was dropped from 24.04. The deploy workflow
+therefore does not run it, for a second reason as well: the assets in `public/` are committed, and
+those are the exact files reviewed in a pull request. Regenerating them during deploy could ship
+brand artwork nobody looked at, and output can vary between ImageMagick builds.
+
+So the rule is: change artwork locally, run `npm run images:build`, commit the result. The
+workflow still guards the outcome — the SEO gate fails if any page references an image that is
+missing from the export, and the completeness step checks the favicons, brand marks, profile
+image and OG cards are all present.
 
 ---
 

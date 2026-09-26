@@ -1,32 +1,15 @@
 {
-  "name": "george-s-thomas-portfolio",
-  "version": "1.0.0",
+  "name": "george-s-thomas",
   "private": true,
-  "description": "George S. Thomas (Thomu) \u2014 personal brand, NKT Group ventures, project pages and SEO/structured-data infrastructure.",
+  "version": "1.0.0",
+  "description": "Personal-business headquarters of George S. Thomas (Thomu) — entrepreneur, business owner and technology builder.",
+  "type": "module",
   "scripts": {
-    "dev": "next dev --hostname 0.0.0.0 --port 3000",
-    "build": "next build",
-    "build:pages": "NEXT_PUBLIC_BASE_PATH=/testing-e-ortfoilo next build",
-    "preview": "node scripts/serve-static.mjs",
-    "seo:check": "node scripts/check-seo.mjs",
-    "seo:report": "node scripts/check-seo.mjs --json > seo-report.json",
-    "images:build": "node scripts/generate-images.mjs",
-    "typecheck": "tsc --noEmit",
-    "verify": "npm run typecheck && npm run build && npm run seo:check",
-    "redirects:build": "node scripts/make-redirects.mjs"
-  },
-  "dependencies": {
-    "next": "16.3.6",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173"
   },
   "devDependencies": {
-    "@types/node": "22.10.2",
-    "@types/react": "19.0.2",
-    "@types/react-dom": "19.0.2",
-    "typescript": "5.7.2"
-  },
-  "engines": {
-    "node": ">=20.9.0"
+    "vite": "^5.4.11"
   }
 }

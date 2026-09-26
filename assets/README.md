@@ -12,8 +12,11 @@ npm run images:build          # uses existing masters
 FORCE_MASTERS=1 npm run images:build   # regenerate the masters too
 ```
 
-Requires ImageMagick (`convert` + `identify`) and the DejaVu fonts — both are present in the
-GitHub Actions runner image, so deployments regenerate identical assets.
+Requires ImageMagick (`convert` + `identify`) and the DejaVu fonts. **Run this locally** — the
+deploy workflow does not regenerate artwork: ImageMagick is not installed on the current
+`ubuntu-latest` runner image, and the committed files are the ones reviewed in the pull request.
+Commit the regenerated assets along with the change that prompted them. If a required image is
+missing from the build, `npm run seo:check` and the deploy workflow both fail.
 
 Output:
 

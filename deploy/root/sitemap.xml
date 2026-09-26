@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Optional root sitemap index for gptthomu-cmd.github.io.
+
+  Publish this beside the root robots.txt in a `gptthomu-cmd.github.io`
+  repository so the whole origin has a discoverable sitemap entry point that
+  points at the project site's own generated sitemap.
+
+  The site's own sitemap (which lists every page) is generated at build time and
+  stays authoritative: https://gptthomu-cmd.github.io/testing-e-ortfoilo/sitemap.xml
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://gptthomu-cmd.github.io/testing-e-ortfoilo/sitemap.xml</loc>
+    <lastmod>2026-09-26</lastmod>
+  </sitemap>
+</sitemapindex>

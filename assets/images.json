@@ -1,0 +1,30 @@
+{
+  "$comment": "Single spec consumed by scripts/generate-images.mjs (Node) and by the app via src/lib/images.ts. Widths produce responsive variants: <out>-<width>.<ext>.",
+  "brand": {
+    "nktGroupLogo": {
+      "out": "/images/brand/nkt-group-logo",
+      "master": "assets/masters/nkt-group-logo.png",
+      "widths": [128, 256, 512],
+      "format": "png",
+      "alt": "NKT Group logo mark"
+    },
+    "siteIcon": {
+      "out": "/images/brand/site-icon",
+      "master": "assets/masters/site-icon.png",
+      "widths": [96, 192, 512],
+      "format": "png",
+      "alt": "George S. Thomas monogram icon"
+    }
+  },
+  "profile": {
+    "portrait": {
+      "out": "/images/profile/george-s-thomas",
+      "master": "assets/masters/profile-identity.png",
+      "widths": [320, 480, 960],
+      "format": "jpg",
+      "alt": "Identity card for George S. Thomas showing a GST monogram on a technical grid",
+      "width": 960,
+      "height": 960
+    }
+  }
+}

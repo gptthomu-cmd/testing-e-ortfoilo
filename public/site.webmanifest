@@ -1,0 +1,36 @@
+{
+  "name": "George S. Thomas — Thomu",
+  "short_name": "Thomu",
+  "description": "Operator, builder and digital architect in Thodupuzha, Kerala. Projects, ventures and writing.",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "categories": ["business", "technology", "portfolio"],
+  "icons": [
+    {
+      "src": "images/brand/site-icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "images/brand/site-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/brand/site-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

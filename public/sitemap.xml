@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
   <url>
     <loc>https://georgesthomas.com/</loc>
     <lastmod>2026-09-26</lastmod>
@@ -8,7 +9,120 @@
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://georgesthomas.com/img/og-cover.jpg</image:loc>
-      <image:title>George S. Thomas — entrepreneur, business owner and technology builder</image:title>
+      <image:title>George S. Thomas — entrepreneur, builder, business owner, technology enthusiast</image:title>
     </image:image>
   </url>
+
+  <url>
+    <loc>https://georgesthomas.com/about/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/og-cover.jpg</image:loc>
+      <image:title>George S. Thomas (Thomu) — entrepreneur and builder in Kerala</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/nkt-group/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/nkt-charge-hub/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/nkt-charge.jpg</image:loc>
+      <image:title>NKT Charge Hub — DC fast EV charging, Thodupuzha, Kerala</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/thomu-lab/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/lab-infra.jpg</image:loc>
+      <image:title>THOMU LAB — AI, automation and self-hosted infrastructure</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/apex-creator-os/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/my-ai-os/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/lab-infra.jpg</image:loc>
+      <image:title>My_AI_OS — personal AI, knowledge graph and agent architecture</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/technology/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/gaming-setup.jpg</image:loc>
+      <image:title>Technology stack — AI, homelab, gaming and 3D printing</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/3d-printing.jpg</image:loc>
+      <image:title>3D printing and rapid prototyping</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/photography.jpg</image:loc>
+      <image:title>Photography and creator technology</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/projects/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/lifestyle/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/contact/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/privacy/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/terms/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>

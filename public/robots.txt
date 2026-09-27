@@ -1,4 +1,11 @@
+# George S. Thomas — digital headquarters
+# Allow legitimate crawling of every public page.
+
 User-agent: *
 Allow: /
+
+# Nothing private is published, so nothing needs blocking. Kept explicit anyway.
+Disallow: /src/
+Disallow: /node_modules/
 
 Sitemap: https://georgesthomas.com/sitemap.xml

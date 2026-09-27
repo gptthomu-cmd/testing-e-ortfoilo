@@ -5,80 +5,87 @@
 
 ## Who
 
-George S. Thomas — known as **Thomu** — is an entrepreneur, business owner and technology enthusiast
-from Thodupuzha, Kerala, India.
+George S. Thomas — publicly known as **Thomu**, online as **thomudidnot** — is an entrepreneur,
+business owner, founder, builder and technology / AI enthusiast from Thodupuzha, Kerala, India.
 
-- Role: Owner / Managing Director, NKT Group
-- Focus: business, technology, finance, investing, trading, AI, automation, computing
-- Status: an early-stage founder building toward a long-term ecosystem — not an established
-  corporate executive, and no revenue, valuation or net-worth figures are published.
+- Role: Owner / Managing Director, NKT Group; founder of THOMU LAB
+- Focus: business, technology, AI, automation, finance, investing, trading, digital infrastructure
+- Family note: he is the nephew of Mathew Kuzhalnadan — a family relationship only. It implies no
+  political affiliation, endorsement, partnership or shared venture.
+- Status: an early-stage founder building toward a long-term ecosystem — not an established corporate
+  executive. No revenue, valuation, client or net-worth figures are published anywhere on the site.
+
+## Identity graph
+
+- George S. Thomas → Thomu / thomudidnot (public and creator identity)
+- George S. Thomas → NKT Group → NKT Charge Hub (business)
+- George S. Thomas → THOMU LAB → Apex Creator OS → My_AI_OS (technology)
 
 ## Businesses and assets (operating today)
 
 - **NKT Group** — the business ecosystem holding real-world businesses, property assets and operations.
   A family enterprise operating in Thodupuzha since 1947, now four generations in.
-- **NKT Charge Hub** — an EV charging business at Nedumpurath Towers, Thodupuzha, Kerala.
-  DC fast charging, CCS2 connectors, 90 kW charging infrastructure, digital monitoring, CCTV and
-  security. Charging management is being developed toward OCPP-based standards. No revenue or
-  utilisation figures are published.
+- **NKT Charge Hub** — an EV charging station at Nedumpurath Towers, Thodupuzha, Kerala: 90 kW DC fast
+  charging infrastructure, dual-gun CCS2 connectors, OCPP-compatible charging management. Operational
+  since March 2026. No pricing, utilisation, energy or financial figures are published.
 - **Nedumpurath Towers** — a real-world property and business asset in the NKT ecosystem.
 - **NKT Vessels House** — another NKT business / property-related operation.
 - **Future Ventures** — deliberately unnamed; no ventures are announced before they exist.
 
 ## Technology and R&D
 
-- **THOMU LAB** — the technology and R&D side of the ecosystem. Work areas: AI (local AI, LLMs, RAG,
-  AI agents, AI automation, AI gateways, knowledge systems), software (web applications, APIs,
-  automation, developer tools), infrastructure (homelab, servers, Docker, private cloud, networking,
-  Tailscale, self-hosted services), open source, and creator technology (cameras, content creation,
-  editing, digital media, 3D printing).
+- **THOMU LAB** — the technology and R&D workbench. Domains: AI, automation, software, open source,
+  self-hosting, homelab, cybersecurity, personal infrastructure, knowledge systems, AI agents, vibe
+  coding and experimental projects (including 3D printing and smart home).
 
 ## Projects
 
-- **Apex Creator OS** — *planned* long-term product vision with two layers. **Financial core:** budgeting,
-  cash flow, net worth, investments, Safe-to-Spend, goals, financial automation, Family Hub,
-  business/entity separation, lifestyle systems, gamification. **Creator workflow:** capture, ingest,
-  edit, grade, publish and archive media through a repeatable system.
-  Architecture concept: Personal OS → Family Hub → Public Platform. Not released.
-- **My_AI_OS** — *experimental* intelligence layer. Connects knowledge, memory, automation, AI models,
-  personal data, business information and decision-making systems. Flow: data/knowledge →
-  RAG + knowledge graph + memory → AI gateway/router → LLMs + AI agents → actions and automation.
-  Concepts: second brain, personal knowledge management, knowledge graph, digital twin, personal CRM,
-  decision OS, data warehouse, Zettelkasten, PARA, GTD. An architecture and intelligence ecosystem,
-  not simply a chatbot.
+- **Apex Creator OS** — *planned*. Tagline: “Master your cash flow, amplify your wealth.” A personal,
+  family and business financial operating system: budgeting, cash flow, net worth, investments,
+  Safe-to-Spend, goals, financial automation, Family Hub, business/entity separation. Not released.
+- **My_AI_OS** — *experimental*. A personal digital intelligence layer, not a chatbot. Architecture:
+  Data → Knowledge → Memory → Intelligence → Models → Agents → Actions. Local-first, self-hosted and
+  model-agnostic; uses RAG, a knowledge graph, memory and scoped AI agents.
+- **Digital Headquarters** — *current*. This website: static, dependency-free, self-hosted fonts,
+  JSON-LD structured data, no third-party requests.
 
 ## Other interests
 
-Gaming, computers, AI and technology, 3D printing, photography and content creation, trading,
-learning, building and experimenting. Finance interests: investing, trading, equity markets, mutual
-funds, real estate, REITs, InvITs, private credit, venture capital, angel investing, commodities and
-precious metals — discussed as philosophy and systems, with no portfolio values or returns published.
+Gaming and gaming hardware, 3D printing and CAD, photography and creator technology (including Sony
+Alpha), EV technology, homelab and self-hosting, investing and trading, knowledge systems. Finance is
+discussed as philosophy and systems — no portfolio values, holdings or returns are ever published.
 
 ## Status vocabulary used on the site
 
 `Current` (operating today) · `Active` (being worked on) · `Experimental` (being tested) ·
 `Planned` (scoped, not started) · `Vision` (long-term ambition).
+Lifestyle pages add `Wishlist` (wanted, not owned) and `Future` (a direction, not a purchase).
 
-Nothing on the site should be summarised as operational if it is labelled Planned, Experimental
-or Vision. The Open-Source Universe project index is intentionally empty — no repositories are
-listed before they exist publicly.
+Nothing on the site should be summarised as operational if it is labelled Planned, Experimental or
+Vision, and no wishlist item should be described as owned. The open-source project index is
+intentionally empty — no repositories are listed before they exist publicly.
 
 ## Contact
 
-- Instagram: https://www.instagram.com/george.s.thomas/ (the only confirmed direct channel)
+- Email: gdrivegeorge@gmail.com (the only public email; a contact address only)
+- LinkedIn: https://www.linkedin.com/in/george-s-thomas-a64b91405
+- Instagram: https://www.instagram.com/george.s.thomas/
 - Location: Thodupuzha, Kerala, India
 
-No email address, phone number or other social profile is published, because none has been confirmed.
+No phone number, private address or other social profile is published.
 
 ## Key pages
 
 - Home: https://georgesthomas.com/
-- NKT Group: https://georgesthomas.com/#nkt
-- THOMU LAB: https://georgesthomas.com/#lab
-- Apex Creator OS: https://georgesthomas.com/#apex
-- My_AI_OS: https://georgesthomas.com/#myaios
-- Wealth: https://georgesthomas.com/#wealth
-- Technology: https://georgesthomas.com/#technology
-- EV technology: https://georgesthomas.com/#ev
-- Vision: https://georgesthomas.com/#vision
-- Contact: https://georgesthomas.com/#contact
+- About: https://georgesthomas.com/about/
+- NKT Group: https://georgesthomas.com/nkt-group/
+- NKT Charge Hub: https://georgesthomas.com/nkt-charge-hub/
+- THOMU LAB: https://georgesthomas.com/thomu-lab/
+- Apex Creator OS: https://georgesthomas.com/apex-creator-os/
+- My_AI_OS: https://georgesthomas.com/my-ai-os/
+- Technology: https://georgesthomas.com/technology/
+- Projects: https://georgesthomas.com/projects/
+- Lifestyle (THOMU MODE): https://georgesthomas.com/lifestyle/
+- Contact: https://georgesthomas.com/contact/
+- Privacy: https://georgesthomas.com/privacy/
+- Terms: https://georgesthomas.com/terms/

@@ -38,13 +38,21 @@
       "@type": "Person",
       "@id": "https://georgesthomas.com/#person",
       "name": "George S. Thomas",
-      "alternateName": ["Thomu", "thomudidnot", "George Thomas", "George S Thomas"],
+      "alternateName": [
+        "Thomu",
+        "thomudidnot",
+        "George Thomas",
+        "George S Thomas"
+      ],
       "url": "https://georgesthomas.com/",
       "email": "mailto:gdrivegeorge@gmail.com",
       "jobTitle": "Owner / Managing Director",
       "description": "George S. Thomas — publicly known as Thomu, online as thomudidnot — is an entrepreneur, business owner and technology enthusiast from Kerala, India, building NKT Group, THOMU LAB, Apex Creator OS and My_AI_OS.",
       "disambiguatingDescription": "Kerala-based entrepreneur and business owner building a long-term ecosystem across business, technology, finance and digital infrastructure.",
-      "nationality": { "@type": "Country", "name": "India" },
+      "nationality": {
+        "@type": "Country",
+        "name": "India"
+      },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Thodupuzha",
@@ -108,15 +116,29 @@
         "Gaming",
         "Photography and digital media"
       ],
-      "worksFor": { "@id": "https://georgesthomas.com/#nktgroup" },
+      "worksFor": {
+        "@id": "https://georgesthomas.com/#nktgroup"
+      },
       "founder": [
-        { "@id": "https://georgesthomas.com/#nktgroup" },
-        { "@id": "https://georgesthomas.com/#thomulab" }
+        {
+          "@id": "https://georgesthomas.com/#nktgroup"
+        },
+        {
+          "@id": "https://georgesthomas.com/#thomulab"
+        }
       ],
       "sameAs": [
         "https://www.linkedin.com/in/george-s-thomas-a64b91405",
         "https://www.instagram.com/george.s.thomas/"
-      ]
+      ],
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://georgesthomas.com/icon-512.png",
+        "contentUrl": "https://georgesthomas.com/icon-512.png",
+        "width": 512,
+        "height": 512,
+        "caption": "George S. Thomas — brand monogram."
+      }
     },
     {
       "@type": "Organization",
@@ -124,20 +146,49 @@
       "name": "NKT Group",
       "url": "https://georgesthomas.com/#nkt",
       "description": "NKT Group is the business ecosystem of George S. Thomas — bringing together real-world businesses, property assets, operations and future ventures. Building businesses. Creating assets. Thinking long term.",
-      "founder": { "@id": "https://georgesthomas.com/#person" },
+      "founder": {
+        "@id": "https://georgesthomas.com/#person"
+      },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Thodupuzha",
         "addressRegion": "Kerala",
         "addressCountry": "IN"
       },
-      "location": { "@type": "Place", "name": "Thodupuzha, Kerala, India" },
-      "areaServed": { "@type": "State", "name": "Kerala, India" },
-      "knowsAbout": ["EV charging", "Property and real assets", "Business operations", "Digital infrastructure"],
+      "location": {
+        "@type": "Place",
+        "name": "Thodupuzha, Kerala, India"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Kerala, India"
+      },
+      "knowsAbout": [
+        "EV charging",
+        "Property and real assets",
+        "Business operations",
+        "Digital infrastructure"
+      ],
       "subOrganization": [
-        { "@id": "https://georgesthomas.com/#nkchargehub" },
-        { "@id": "https://georgesthomas.com/#thomulab" }
-      ]
+        {
+          "@id": "https://georgesthomas.com/#nkchargehub"
+        },
+        {
+          "@id": "https://georgesthomas.com/#thomulab"
+        }
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://georgesthomas.com/#nktgroup-logo",
+        "url": "https://georgesthomas.com/img/brand/nkt-group-logo-512.png",
+        "contentUrl": "https://georgesthomas.com/img/brand/nkt-group-logo-512.png",
+        "width": 512,
+        "height": 512,
+        "caption": "NKT Group logo."
+      },
+      "image": {
+        "@id": "https://georgesthomas.com/#nktgroup-logo"
+      }
     },
     {
       "@type": "LocalBusiness",
@@ -146,7 +197,9 @@
       "url": "https://georgesthomas.com/#ev",
       "description": "EV charging business operating at Nedumpurath Towers, Thodupuzha, Kerala — DC fast charging with CCS2 connectors and 90 kW charging infrastructure, with digital monitoring, CCTV and security. Charging management is being developed toward OCPP-based standards.",
       "additionalType": "https://en.wikipedia.org/wiki/Charging_station",
-      "parentOrganization": { "@id": "https://georgesthomas.com/#nktgroup" },
+      "parentOrganization": {
+        "@id": "https://georgesthomas.com/#nktgroup"
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Nedumpurath Towers",
@@ -155,10 +208,22 @@
         "addressCountry": "IN"
       },
       "areaServed": [
-        { "@type": "City", "name": "Thodupuzha" },
-        { "@type": "State", "name": "Kerala" }
+        {
+          "@type": "City",
+          "name": "Thodupuzha"
+        },
+        {
+          "@type": "State",
+          "name": "Kerala"
+        }
       ],
-      "knowsAbout": ["Electric vehicle charging", "DC fast charging", "CCS2", "Energy systems", "OCPP"]
+      "knowsAbout": [
+        "Electric vehicle charging",
+        "DC fast charging",
+        "CCS2",
+        "Energy systems",
+        "OCPP"
+      ]
     },
     {
       "@type": "Organization",
@@ -166,9 +231,23 @@
       "name": "THOMU LAB",
       "url": "https://georgesthomas.com/#lab",
       "description": "THOMU LAB is the technology and R&D side of the ecosystem — a space for experimenting with AI, software, automation, open-source infrastructure, computing and emerging technologies.",
-      "parentOrganization": { "@id": "https://georgesthomas.com/#nktgroup" },
-      "founder": { "@id": "https://georgesthomas.com/#person" },
-      "knowsAbout": ["Artificial intelligence", "Local AI", "AI agents", "Automation", "Open-source software", "Self-hosted services", "Homelab", "3D printing", "Content creation technology"]
+      "parentOrganization": {
+        "@id": "https://georgesthomas.com/#nktgroup"
+      },
+      "founder": {
+        "@id": "https://georgesthomas.com/#person"
+      },
+      "knowsAbout": [
+        "Artificial intelligence",
+        "Local AI",
+        "AI agents",
+        "Automation",
+        "Open-source software",
+        "Self-hosted services",
+        "Homelab",
+        "3D printing",
+        "Content creation technology"
+      ]
     },
     {
       "@type": "SoftwareApplication",
@@ -177,8 +256,12 @@
       "url": "https://georgesthomas.com/#apex",
       "applicationCategory": "FinanceApplication",
       "description": "Apex Creator OS — master your cash flow, amplify your wealth. Envisioned as a personal, family, business and financial operating system covering budgeting, net worth, investments, Safe-to-Spend, goals, financial automation, Family Hub, business/entity separation and gamification. Status: planned long-term product vision, not released.",
-      "author": { "@id": "https://georgesthomas.com/#person" },
-      "isPartOf": { "@id": "https://georgesthomas.com/#thomulab" }
+      "author": {
+        "@id": "https://georgesthomas.com/#person"
+      },
+      "isPartOf": {
+        "@id": "https://georgesthomas.com/#thomulab"
+      }
     },
     {
       "@type": "SoftwareApplication",
@@ -187,8 +270,12 @@
       "url": "https://georgesthomas.com/#myaios",
       "applicationCategory": "BusinessApplication",
       "description": "My_AI_OS is the intelligence layer behind the ecosystem — connecting knowledge, memory, automation, AI models, personal data, business information and decision-making systems through RAG, a knowledge graph, model routing and AI agents. An architecture and intelligence ecosystem, not simply a chatbot. Status: experimental.",
-      "author": { "@id": "https://georgesthomas.com/#person" },
-      "isPartOf": { "@id": "https://georgesthomas.com/#thomulab" }
+      "author": {
+        "@id": "https://georgesthomas.com/#person"
+      },
+      "isPartOf": {
+        "@id": "https://georgesthomas.com/#thomulab"
+      }
     },
     {
       "@type": "WebSite",
@@ -196,8 +283,12 @@
       "url": "https://georgesthomas.com/",
       "name": "George S. Thomas — Digital Headquarters",
       "description": "The personal-business headquarters of George S. Thomas (Thomu): NKT Group, THOMU LAB, Apex Creator OS and My_AI_OS.",
-      "publisher": { "@id": "https://georgesthomas.com/#person" },
-      "about": { "@id": "https://georgesthomas.com/#person" },
+      "publisher": {
+        "@id": "https://georgesthomas.com/#person"
+      },
+      "about": {
+        "@id": "https://georgesthomas.com/#person"
+      },
       "inLanguage": "en"
     },
     {
@@ -206,10 +297,19 @@
       "url": "https://georgesthomas.com/",
       "name": "George S. Thomas | Entrepreneur, Business Owner & Technology Builder",
       "description": "The digital headquarters of George S. Thomas (Thomu) — NKT Group, THOMU LAB, Apex Creator OS and My_AI_OS.",
-      "isPartOf": { "@id": "https://georgesthomas.com/#website" },
-      "about": { "@id": "https://georgesthomas.com/#person" },
-      "primaryImageOfPage": { "@id": "https://georgesthomas.com/#primaryimage" },
-      "inLanguage": "en"
+      "isPartOf": {
+        "@id": "https://georgesthomas.com/#website"
+      },
+      "about": {
+        "@id": "https://georgesthomas.com/#person"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://georgesthomas.com/#primaryimage"
+      },
+      "inLanguage": "en",
+      "image": {
+        "@id": "https://georgesthomas.com/#primaryimage"
+      }
     },
     {
       "@type": "ImageObject",

@@ -1,0 +1,49 @@
+# =============================================================================
+# Response headers — performance + security for static hosting.
+#
+# Supported by Netlify and Cloudflare Pages out of the box. On other hosts,
+# copy these rules into nginx / Apache / your CDN config.
+#
+# Why this matters for Core Web Vitals: content-hashed assets never change, so
+# a one-year immutable cache removes an entire round trip for returning
+# visitors (LCP). HTML is revalidated so an edit goes live immediately.
+# =============================================================================
+
+# Hashed build assets (JS + CSS): immutable, cache for a year
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Fonts are content-hashed by name and never change
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  X-Content-Type-Options: nosniff
+
+# Images: long cache, safe to revalidate
+/img/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+  X-Content-Type-Options: nosniff
+
+# Icons, manifest, crawler files
+/*.svg
+  Cache-Control: public, max-age=604800
+/*.png
+  Cache-Control: public, max-age=604800
+/*.webmanifest
+  Cache-Control: public, max-age=3600
+  Content-Type: application/manifest+json
+/robots.txt
+  Cache-Control: public, max-age=3600
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/llms.txt
+  Cache-Control: public, max-age=3600
+
+# HTML: always revalidate so edits publish instantly
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

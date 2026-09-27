@@ -209,6 +209,9 @@ attributes and alt text honest, and update the caption (currently "Conceptual il
 
 ## 10. Before deploying
 
+0. Set the two placeholders in `src/partials/head.html`: the Search Console
+   `google-site-verification` code and, if you want analytics, the GA4 Measurement ID. Both are
+   inert by default — see `docs/SEARCH-CONSOLE.md`.
 1. Replace `https://georgesthomas.com` with the real domain in **every** HTML file
    (`index.html`, `404.html` and each `*/index.html` — canonical, OG/Twitter URLs and JSON-LD
    `@id`s), plus `public/robots.txt` and `public/sitemap.xml`. A project-wide search-and-replace
@@ -237,6 +240,14 @@ Three places carry the search/AI-discoverability layer, and all three should be 
 3. Add it to the **Contact** heading in `public/llms.txt`.
 
 Do all three or the identity signals disagree with each other.
+
+### Analytics & verification
+
+- `src/partials/head.html` holds both placeholders (Search Console tag, GA4 ID). They are shared by
+  every page, so one edit covers the site.
+- `src/lib/analytics.js` is a no-op until a real `G-…` ID is set *and* the visitor accepts. Do not
+  hard-code a tag elsewhere — that would bypass the consent gate and make `/privacy/` inaccurate.
+- If you enable analytics, update the "Analytics" section of `/privacy/` in the same commit.
 
 ### Per-page SEO
 

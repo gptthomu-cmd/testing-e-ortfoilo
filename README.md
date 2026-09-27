@@ -83,9 +83,12 @@ src/
 public/
   fonts/                    Sora, Inter, JetBrains Mono (woff2, latin)
   img/                      hero, EV, homelab, gaming, 3D printing, photography + OG cover
-  favicon.svg, apple-touch-icon.png, icon-512.png, site.webmanifest
+  favicon.svg, apple-touch-icon.png, icon-192/512.png, site.webmanifest
   robots.txt, sitemap.xml, llms.txt
+  _headers                  caching + security headers (Netlify/Cloudflare)
+  _redirects                301s and the 404 route (Netlify/Cloudflare)
 docs/CONTENT.md             how to update copy, statuses, projects and pages
+docs/SEARCH-CONSOLE.md      verification, indexing, monitoring playbook
 ```
 
 ### The partials system (no plugin dependency)
@@ -219,7 +222,22 @@ today, what is planned, the status vocabulary and every page URL — linked from
 alternate.
 
 **Crawling:** `robots.txt` allows everything public and points at `sitemap.xml`, which lists all
-fourteen indexable URLs (images included) — `404.html` is intentionally excluded.
+fourteen indexable URLs (images included) — `404.html` is intentionally excluded and `noindex`.
+
+**Verification, analytics and monitoring:** `docs/SEARCH-CONSOLE.md` is the full playbook —
+how to verify the property, submit the sitemap, request indexing, read index-coverage and
+Core Web Vitals reports, and the monitoring cadence. Two placeholders live in
+`src/partials/head.html`:
+
+| Placeholder | Purpose | Default |
+| --- | --- | --- |
+| `google-site-verification` (commented) | Search Console verification, shared by every page | not set |
+| `window.GA_MEASUREMENT_ID` | GA4, loaded **only after the visitor accepts** | `G-XXXXXXXXXX` = off |
+
+With the placeholder left as-is the site makes **zero** third-party requests. Set a real
+Measurement ID and `src/lib/analytics.js` shows a small accept/decline card, starts Google
+Consent Mode v2 in the denied state, and only loads the tag after an opt-in (remembered in
+`localStorage`).
 
 ### Before going live
 
@@ -231,8 +249,13 @@ fourteen indexable URLs (images included) — `404.html` is intentionally exclud
 3. Serve clean URLs: keep the folder structure (`/about/index.html` → `/about/`) and let the host
    handle the trailing slash. If you switch a page to `/about.html`, add a 301 redirect from
    `/about/` and update the sitemap.
-4. Verify the OG card in a social preview debugger, and submit `sitemap.xml` to Google Search
-   Console (the site is Search-Console and Analytics ready — add an ID when you want them).
+4. Enable HTTPS and HSTS at the host — header rules are provided in `public/_headers`
+   (Netlify/Cloudflare read it directly; copy the rules into nginx/Apache elsewhere). It also
+   sets immutable caching for hashed assets, which is the single biggest Core Web Vitals win.
+5. Add the Search Console verification tag (`src/partials/head.html`) and, if you want
+   analytics, the GA4 Measurement ID. Then follow `docs/SEARCH-CONSOLE.md`: submit the sitemap,
+   request indexing for the 13 indexable URLs, and check the structured-data report.
+6. Verify the OG card in a social preview debugger.
 
 ---
 

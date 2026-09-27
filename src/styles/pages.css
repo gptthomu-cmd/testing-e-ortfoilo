@@ -539,3 +539,50 @@ a.contactblock__value:hover { color: var(--teal); }
   margin-top: var(--sp-5);
 }
 .contactcard__main .contactcard__label:not(:first-child) { margin-top: var(--sp-5); }
+
+/* ==========================================================================
+   ANALYTICS CONSENT CARD
+   Only ever rendered when a GA4 Measurement ID is configured and the
+   visitor has not yet decided. Hidden from print; respects reduced motion.
+   ========================================================================== */
+
+.consent {
+  position: fixed;
+  z-index: 140;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: var(--gutter);
+  max-width: 420px;
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.1rem 1.25rem 1.2rem;
+  border: 1px solid var(--line-mid);
+  border-radius: var(--r-md);
+  background: rgba(9, 13, 20, 0.92);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out);
+}
+.consent.is-visible { opacity: 1; transform: none; }
+
+.consent__text { font-size: 0.85rem; line-height: 1.6; color: var(--text-2); }
+.consent__actions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.consent__link {
+  font-size: 0.78rem;
+  color: var(--text-4);
+  text-decoration: underline;
+  text-decoration-color: var(--line-mid);
+  text-underline-offset: 3px;
+}
+.consent__link:hover { color: var(--teal); }
+
+@media (min-width: 640px) {
+  .consent { right: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .consent { transition: none; opacity: 1; transform: none; }
+}
+html.reduce-motion .consent { transition: none; }

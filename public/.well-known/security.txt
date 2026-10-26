@@ -1,0 +1,19 @@
+# =============================================================================
+# security.txt — RFC 9116
+# https://georgesthomas.com/.well-known/security.txt
+#
+# A standard, machine-readable way for someone who finds a problem on this
+# site to tell the owner about it. Nothing else: there is no bug bounty, no
+# encrypted channel and no security team behind this address.
+# =============================================================================
+
+Contact: mailto:gdrivegeorge@gmail.com
+Expires: 2027-10-26T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://georgesthomas.com/.well-known/security.txt
+Policy: https://georgesthomas.com/privacy/
+
+# Scope: this website only (georgesthomas.com). Reports about third-party
+# services linked from it should go to those services.
+# Please do not send: bank, card, credential or other private information of
+# any kind. A plain description is enough.

@@ -1,0 +1,31 @@
+/* TEAM */
+
+  Developer: George S. Thomas (Thomu)
+  Contact: gdrivegeorge@gmail.com
+  Location: Thodupuzha, Kerala, India
+  Roles: Entrepreneur · Business owner · Builder
+
+/* SITE */
+
+  Last update: 2026/10/26
+  Language: English
+  Doctype: HTML5
+  Standards: HTML5, CSS, JavaScript (ES2020)
+  Components: Hand-written HTML and CSS. No framework, no UI kit, no CDN.
+  Build: Vite (build-time only — nothing it produces ships as a dependency)
+  Fonts: Sora + Inter, self-hosted as variable woff2
+  Analytics: Google Analytics 4, consent-gated and off until you accept
+  Tracking: No third-party cookies, no ad pixels, no session recording
+
+/* THANKS */
+
+  To everyone who answered a question about EV charging, load sanctioning or
+  OCPP while NKT Charge Hub was being built.
+
+/* NOTES */
+
+  Every fact on this site is either published here or not published at all.
+  Nothing on it is invented: no invented revenue, customers, awards or
+  partners, and nothing announced before it exists. Planned work is labelled
+  PLANNED, aspirational work is labelled WISHLIST or FUTURE.
+  Found something wrong? gdrivegeorge@gmail.com

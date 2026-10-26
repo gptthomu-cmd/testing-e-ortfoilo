@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+<!-- page:blog-post -->
+<!-- include:head -->
+<title>What Building an EV Charging Station Actually Taught Me | George S. Thomas</title>
+<meta name="description" content="Notes from building NKT Charge Hub in Thodupuzha, Kerala — 90 kW DC fast charging, CCS2, OCPP, uptime, load and monitoring, and the difference between a pilot and a business." />
+<link rel="canonical" href="https://georgesthomas.com/blog/building-nkt-charge-hub/" />
+<link rel="alternate" type="application/rss+xml" title="George S. Thomas — Writing" href="https://georgesthomas.com/blog/feed.xml" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="George S. Thomas" />
+<meta property="og:title" content="What Building an EV Charging Station Actually Taught Me" />
+<meta property="og:description" content="Notes from building NKT Charge Hub in Thodupuzha, Kerala — 90 kW DC fast charging, CCS2, OCPP, uptime, load and monitoring." />
+<meta property="og:url" content="https://georgesthomas.com/blog/building-nkt-charge-hub/" />
+<meta property="og:image" content="https://georgesthomas.com/img/nkt-charge.jpg" />
+<meta property="og:image:width" content="1408" />
+<meta property="og:image:height" content="768" />
+<meta property="og:image:alt" content="Conceptual illustration of a DC fast EV charging bay lit at night." />
+<meta property="og:locale" content="en_IN" />
+<meta property="article:published_time" content="2026-10-26T09:00:00+05:30" />
+<meta property="article:modified_time" content="2026-10-26T09:00:00+05:30" />
+<meta property="article:author" content="George S. Thomas" />
+<meta property="article:section" content="NKT Group" />
+<meta property="article:tag" content="EV charging" />
+<meta property="article:tag" content="NKT Charge Hub" />
+<meta property="article:tag" content="DC fast charging" />
+<meta property="article:tag" content="CCS2" />
+<meta property="article:tag" content="OCPP" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="What Building an EV Charging Station Actually Taught Me" />
+<meta name="twitter:description" content="Notes from building NKT Charge Hub in Thodupuzha, Kerala — uptime, load, monitoring, and what a pilot project never shows you." />
+<meta name="twitter:image" content="https://georgesthomas.com/img/nkt-charge.jpg" />
+<meta name="twitter:image:alt" content="Conceptual illustration of a DC fast EV charging bay lit at night." />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://georgesthomas.com/blog/building-nkt-charge-hub/#article",
+      "url": "https://georgesthomas.com/blog/building-nkt-charge-hub/",
+      "mainEntityOfPage": { "@id": "https://georgesthomas.com/blog/building-nkt-charge-hub/#webpage" },
+      "headline": "What Building an EV Charging Station Actually Taught Me",
+      "alternativeHeadline": "Notes from building NKT Charge Hub in Thodupuzha, Kerala",
+      "description": "Notes from building NKT Charge Hub in Thodupuzha, Kerala — 90 kW DC fast charging, CCS2, OCPP, uptime, load and monitoring, and the difference between a pilot project and a business.",
+      "image": { "@id": "https://georgesthomas.com/blog/building-nkt-charge-hub/#primaryimage" },
+      "datePublished": "2026-10-26T09:00:00+05:30",
+      "dateModified": "2026-10-26T09:00:00+05:30",
+      "author": { "@id": "https://georgesthomas.com/#person" },
+      "publisher": { "@id": "https://georgesthomas.com/#person" },
+      "isPartOf": { "@id": "https://georgesthomas.com/#website" },
+      "articleSection": "NKT Group",
+      "inLanguage": "en",
+      "timeRequired": "PT5M",
+      "keywords": ["EV charging", "NKT Charge Hub", "DC fast charging", "CCS2", "OCPP", "EV infrastructure", "Thodupuzha", "Kerala"],
+      "about": [
+        { "@type": "Thing", "name": "Electric vehicle charging infrastructure" },
+        { "@id": "https://georgesthomas.com/#nkchargehub" }
+      ],
+      "mentions": [{ "@id": "https://georgesthomas.com/#thomulab" }]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://georgesthomas.com/blog/building-nkt-charge-hub/#webpage",
+      "url": "https://georgesthomas.com/blog/building-nkt-charge-hub/",
+      "name": "What Building an EV Charging Station Actually Taught Me | George S. Thomas",
+      "isPartOf": { "@id": "https://georgesthomas.com/#website" },
+      "breadcrumb": { "@id": "https://georgesthomas.com/blog/building-nkt-charge-hub/#breadcrumb" },
+      "primaryImageOfPage": { "@id": "https://georgesthomas.com/blog/building-nkt-charge-hub/#primaryimage" },
+      "datePublished": "2026-10-26T09:00:00+05:30",
+      "dateModified": "2026-10-26T09:00:00+05:30",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://georgesthomas.com/blog/building-nkt-charge-hub/#primaryimage",
+      "url": "https://georgesthomas.com/img/nkt-charge.jpg",
+      "contentUrl": "https://georgesthomas.com/img/nkt-charge.jpg",
+      "width": 1408,
+      "height": 768,
+      "caption": "Conceptual illustration of a DC fast EV charging bay lit at night."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://georgesthomas.com/blog/building-nkt-charge-hub/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://georgesthomas.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://georgesthomas.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "What Building an EV Charging Station Actually Taught Me" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body data-page="{{page}}">
+<!-- include:top -->
+<!-- include:nav -->
+
+<main id="main">
+
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <div class="shell">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li class="crumbs__sep" aria-hidden="true">/</li>
+        <li><a href="/blog/">Writing</a></li>
+        <li class="crumbs__sep" aria-hidden="true">/</li>
+        <li aria-current="page">Building an EV charging station</li>
+      </ol>
+    </div>
+  </nav>
+
+  <header class="pagehead">
+    <div class="shell">
+      <div class="pagehead__inner">
+        <p class="pagehead__eyebrow"><span class="eyebrow__num">NKT Group</span> EV infrastructure</p>
+        <h1>What Building an EV Charging Station Actually Taught Me</h1>
+        <p class="pagehead__lede">
+          NKT Charge Hub has been operating in Thodupuzha since March 2026. This is what went into it —
+          the site, the specification, and the three unglamorous things that decide whether a charger is a
+          business or a prop.
+        </p>
+        <p class="post__meta">
+          <time datetime="2026-10-26T09:00:00+05:30">26 October 2026</time>
+          <span aria-hidden="true">·</span>
+          <span>5 min read</span>
+          <span aria-hidden="true">·</span>
+          <span>By George S. Thomas</span>
+        </p>
+      </div>
+
+      <figure class="post__figure" data-reveal>
+        <picture>
+          <source srcset="/img/nkt-charge.webp" type="image/webp" />
+          <img src="/img/nkt-charge.jpg" alt="Conceptual illustration of a DC fast EV charging bay lit at night" width="1408" height="768" decoding="async" />
+        </picture>
+        <figcaption>Conceptual illustration of the charging site — the bay is real, the picture is not a photograph of it.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <article class="section section--page">
+    <div class="shell">
+      <div class="post prose" data-reveal>
+
+        <p class="lead">
+          A charging point looks like a piece of furniture until you own one. Then it becomes three
+          businesses wearing one cabinet: an energy business, a software business, and a service business
+          that has to answer a phone when something does not work.
+        </p>
+
+        <h2>Why charging</h2>
+        <p>
+          I wanted a business that could not be faked. Software can look finished while it is held
+          together with hope; a charger either delivers power to a car or it does not, and the driver
+          knows within ninety seconds which one happened.
+        </p>
+        <p>
+          The second reason is boring and more honest: electric vehicles are arriving in Kerala whether
+          or not anyone in my position builds for them. Charging is the part of that shift that behaves
+          like real estate — a location, a connection, a long asset life — and it sits close enough to
+          the technology work I already do that the two can feed each other.
+        </p>
+
+        <h2>Choosing the site</h2>
+        <p>
+          NKT Charge Hub operates at Nedumpurath Towers in Thodupuzha, a property already inside the NKT
+          ecosystem. That decision was not clever, it was structural: when the site is an asset you
+          already hold and understand, the questions you are left with are the ones that matter —
+          power, access, visibility, and whether a driver can actually manoeuvre into the bay.
+        </p>
+        <p>
+          Location in charging is not about being central. It is about being <em>on the way</em>: on a
+          route people already drive, with enough space to wait, and enough visibility that a stranger
+          trusts it in the dark.
+        </p>
+
+        <h2>The specification, and why it matters</h2>
+        <p>
+          The site runs 90 kW of DC fast charging through dual-gun CCS2 connectors, with OCPP-compatible
+          charging management behind it. Three choices, three reasons:
+        </p>
+        <ul>
+          <li><strong>DC, not AC.</strong> Fast charging is the product. Slow charging is a amenity you
+            offer while someone shops for two hours — a different business with a different customer.</li>
+          <li><strong>CCS2.</strong> It is the connector the Indian market has settled on for DC
+            charging. Anything else is a bet that the country will change its mind.</li>
+          <li><strong>OCPP-compatible management.</strong> Standards-based control means the site is not
+            locked to one vendor's software. If the network around it changes, the charger can change
+            with it instead of becoming expensive furniture.</li>
+        </ul>
+
+        <blockquote class="pull">
+          <p>“A charging point is not a plug. It is an energy system, a software system and a service business wearing one cabinet.”</p>
+          <cite>NKT Charge Hub, operating note</cite>
+        </blockquote>
+
+        <h2>Three things nobody puts in the brochure</h2>
+
+        <h3>Uptime is the product</h3>
+        <p>
+          Drivers do not buy kilowatt-hours; they buy the confidence that the next charger will work.
+          A site that is down at 9pm on a Sunday costs more than the session it lost — it teaches that
+          driver to plan around you, and they will keep that habit. Availability is the entire
+          reputation of the business, and it is built out of maintenance, spares, and someone actually
+          looking at the alerts.
+        </p>
+
+        <h3>Load, demand and the grid</h3>
+        <p>
+          The electrical reality sits underneath everything: sanctioned load, how demand behaves across
+          a day, what happens when two vehicles want power at once. This is the part of EV
+          infrastructure that marketing never mentions, and the part you cannot fake your way through.
+          Understanding your own load curve is what makes every later decision — pricing, expansion,
+          storage — something other than a guess.
+        </p>
+
+        <h3>Monitoring is not optional</h3>
+        <p>
+          Digital monitoring and CCTV started as security and turned into operations. You cannot manage
+          what you cannot see: which sessions failed, what the fault codes say, whether a fault cleared
+          itself or is waiting for a human. Remote visibility is the difference between hearing about a
+          problem from a customer and fixing it before they arrive.
+        </p>
+
+        <h2>Where the technology work comes in</h2>
+        <p>
+          This is the seam between the business and <a href="/thomu-lab/">THOMU LAB</a>. Charging
+          generates exactly the kind of operational data that is useless in a spreadsheet and valuable
+          in a system: session histories, faults, utilisation patterns, energy delivered, downtime
+          reasons.
+        </p>
+        <p>
+          The work in the lab — automation, reporting, and eventually the intelligence layer I am
+          building as <a href="/my-ai-os/">My_AI_OS</a> — exists to turn that stream into something I
+          can act on without spending my evening reading logs. It is not a science project bolted onto
+          a business; it is the reason the business can be run by a small number of people.
+        </p>
+
+        <h2>What I am deliberately not publishing</h2>
+        <p>
+          No utilisation figures, no revenue, no energy numbers, no pricing, no expansion dates. Not
+          because they are secret in any dramatic sense, but because publishing early numbers invites
+          people to judge a twelve-month-old asset by the standards of a mature network. When there is
+          something worth reporting, it will be reported with the date attached — and this page will say
+          so rather than quietly rounding up.
+        </p>
+
+        <h2>What comes next</h2>
+        <p>
+          Three directions, in order: make monitoring genuinely useful rather than merely present;
+          automate the reporting so the numbers arrive without being asked for; and learn enough from
+          one site to know exactly what a second one would need. The last thing this business needs is a
+          second location before the first one is boring.
+        </p>
+        <p>
+          The wider interest stays where it started — vehicle technology, energy storage, and
+          intelligent mobility. Charging is the entry point, not the whole map.
+        </p>
+
+        <ul class="post__tags">
+          <li class="chip">EV charging</li>
+          <li class="chip">NKT Charge Hub</li>
+          <li class="chip">DC fast charging</li>
+          <li class="chip">CCS2</li>
+          <li class="chip">OCPP</li>
+          <li class="chip">EV infrastructure</li>
+          <li class="chip">Thodupuzha</li>
+        </ul>
+
+        <div class="authorcard">
+          <img class="authorcard__mark" src="/icon-192.png" alt="George S. Thomas monogram" width="192" height="192" loading="lazy" decoding="async" />
+          <div>
+            <p class="authorcard__name">George S. Thomas</p>
+            <p class="authorcard__text">
+              Entrepreneur, business owner and technology builder in Thodupuzha, Kerala. Runs NKT Group,
+              builds the technology side in THOMU LAB, and writes here when the work is worth writing about.
+            </p>
+            <p class="authorcard__links">
+              <a href="mailto:gdrivegeorge@gmail.com">gdrivegeorge@gmail.com</a>
+              <a href="https://www.linkedin.com/in/george-s-thomas-a64b91405" target="_blank" rel="noopener noreferrer me">LinkedIn</a>
+              <a href="/about/">About</a>
+            </p>
+          </div>
+        </div>
+
+        <nav class="postnav" aria-label="More writing">
+          <a class="postnav__item" href="/blog/">
+            <span class="postnav__dir">← All writing</span>
+            <span class="postnav__title">Notes From the Build</span>
+          </a>
+          <div class="postnav__item postnav__item--disabled">
+            <span class="postnav__dir">Next post →</span>
+            <span class="postnav__title">Not published yet — it will appear when it is written.</span>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+  </article>
+
+  <section class="section section--tight" aria-label="Related pages">
+    <div class="shell">
+      <div class="cta" data-reveal>
+        <h2 class="cta__title">The thing this post is about</h2>
+        <p class="cta__text">
+          NKT Charge Hub has its own page with the confirmed specification, the location and the answers
+          to the questions people actually ask.
+        </p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="/nkt-charge-hub/" data-magnetic><span>NKT Charge Hub</span></a>
+          <a class="btn btn--outline" href="/nkt-group/"><span>NKT Group</span></a>
+          <a class="link-arrow" href="/contact/">Ask me something<span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- include:footer -->
+</body>
+</html>

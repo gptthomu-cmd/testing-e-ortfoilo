@@ -1,0 +1,20 @@
+# =============================================================================
+# Redirects — Netlify syntax (also understood by Cloudflare Pages).
+#
+# Rule of thumb: never serve the same content at two URLs. Pick the clean
+# folder URL, 301 everything else to it, and keep only that URL in the sitemap
+# and in your internal links.
+# =============================================================================
+
+# Not-found page (Netlify/Cloudflare serve this automatically; GitHub Pages
+# uses 404.html from the site root, Apache/nginx need an ErrorDocument).
+/*    /404.html    404
+
+# ── Uncomment and edit if you ever change a URL ──────────────────────────────
+# /old-page/          /new-page/            301
+# /nkt-charge-hub     /nkt-charge-hub/      301   # force the trailing slash
+# /index.html         /                     301
+# /home/              /                     301
+
+# ── If you move to a new domain ──────────────────────────────────────────────
+# https://old-domain.com/*   https://georgesthomas.com/:splat   301

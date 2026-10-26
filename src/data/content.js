@@ -70,11 +70,13 @@ export const ecosystem = {
    My_AI_OS — architecture layers
    -------------------------------------------------------------------------- */
 export const aiLayers = {
-  '01': 'Everything the system is allowed to know: notes, documents, business records, market research, operational data. Owning the input layer is what makes the rest trustworthy.',
-  '02': 'Retrieval, relationships and continuity. RAG finds what is relevant, a knowledge graph explains how things connect, and memory keeps context across time instead of resetting every conversation.',
-  '03': 'A routing layer that decides which model handles which task — local where privacy matters, hosted where capability matters, deterministic code where neither model is needed.',
-  '04': 'Language models and agents working as a team: one for analysis, one for drafting, one for checking. Agents get scoped tools and clear authority, not unrestricted access.',
-  '05': 'The part most systems skip — turning answers into executed work: updating records, generating reports, triggering automations and closing the loop back into the data layer.'
+  '01': 'Everything the system is allowed to know: notes, documents, business records, market research and operational data. Owning the input layer is what makes everything above it trustworthy.',
+  '02': 'Retrieval and structure. RAG finds what is relevant and a knowledge graph explains how things connect — so an answer can point at something real instead of inventing it.',
+  '03': 'Continuity across time. Memory keeps decisions, preferences and context instead of resetting every conversation — stored deliberately, inspectable, and deletable.',
+  '04': 'Reasoning over what the system already knows: summarising, comparing, planning and flagging what changed, using accumulated context rather than a fresh guess.',
+  '05': 'A routing layer that decides which model handles which task — local where privacy matters, hosted where capability matters, deterministic code where neither model is needed.',
+  '06': 'Models and agents working as a team: one for analysis, one for drafting, one for checking. Agents get scoped tools and clear authority, not unrestricted access.',
+  '07': 'The part most systems skip — turning answers into executed work: updating records, generating reports, triggering automations and closing the loop back into the data layer.'
 };
 
 /* --------------------------------------------------------------------------

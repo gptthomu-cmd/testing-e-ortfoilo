@@ -18,6 +18,7 @@ import { initFlow } from './lib/flow.js';
 import { initMap } from './lib/map.js';
 import { initProjects } from './lib/projects.js';
 import { initCardSpotlight } from './lib/interactions.js';
+import { initAnalytics, initConsentControls } from './lib/analytics.js';
 
 const start = () => {
   initNav();
@@ -30,6 +31,8 @@ const start = () => {
   initMap();
   initProjects();
   initCardSpotlight();
+  initAnalytics();
+  initConsentControls();
 };
 
 if (document.readyState === 'loading') {

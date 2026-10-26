@@ -98,6 +98,28 @@
   </url>
 
   <url>
+    <loc>https://georgesthomas.com/blog/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/nkt-charge.jpg</image:loc>
+      <image:title>Notes From the Build — writing by George S. Thomas</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://georgesthomas.com/blog/building-nkt-charge-hub/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://georgesthomas.com/img/nkt-charge.jpg</image:loc>
+      <image:title>What Building an EV Charging Station Actually Taught Me</image:title>
+    </image:image>
+  </url>
+
+  <url>
     <loc>https://georgesthomas.com/lifestyle/</loc>
     <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>

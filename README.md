@@ -37,6 +37,8 @@ Every page is a real, static, indexable HTML file at a clean URL:
 | `/my-ai-os/` | My_AI_OS | Seven-layer intelligence architecture, design rules, privacy stance |
 | `/technology/` | Technology | The stack, plus gaming, 3D printing and photography/creative |
 | `/projects/` | Projects | Five entries with real statuses + the open-source index |
+| `/blog/` | Writing | Post index + RSS feed |
+| `/blog/building-nkt-charge-hub/` | Post | First article, with `BlogPosting` schema |
 | `/lifestyle/` | THOMU MODE | Wealth systems and the future stack — every line labelled |
 | `/contact/` | Contact | Contact card, what to write about, what never to send |
 | `/privacy/`·`/terms/` | Legal | Plain-language privacy policy and terms of use |
@@ -51,6 +53,8 @@ index.html                  homepage: semantic markup, SEO meta, JSON-LD
 about/  nkt-group/  nkt-charge-hub/  thomu-lab/  apex-creator-os/
 my-ai-os/  technology/  projects/  lifestyle/  contact/  privacy/  terms/
                             one index.html per page (folder = clean URL)
+blog/index.html             writing index
+blog/building-nkt-charge-hub/  first post (one folder per post)
 404.html                    not-found page
 vite.config.js              MPA entry points + the HTML partials plugin
 src/

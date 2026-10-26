@@ -268,3 +268,42 @@ if it were operating.
 site-search tools still read it. Keep the list honest: including a term is a claim that the page
 genuinely covers the topic. Do not add competitor names, unrelated high-traffic terms, or place
 names the businesses are not actually in.
+
+---
+
+## 12. Writing (the blog)
+
+Two files make up the writing section:
+
+| File | What it is |
+| --- | --- |
+| `blog/index.html` | The index. Lists every post and links the RSS feed. |
+| `blog/<slug>/index.html` | One page per post. |
+| `public/blog/feed.xml` | RSS 2.0 feed — must be updated by hand with each new post. |
+
+### Adding a post
+
+1. Copy `blog/building-nkt-charge-hub/index.html` to `blog/my-post-slug/index.html` and set
+   `<!-- page:blog-post -->` at the top of `<head>` (this keeps the "Writing" nav item highlighted).
+2. Register it in `pages` in `vite.config.js` — an unregistered page is not built.
+3. Rewrite: `<title>`, meta description, canonical, `article:*` tags, and the JSON-LD
+   `BlogPosting` (`datePublished`, `dateModified`, `headline`, `timeRequired`, `keywords`).
+   Keep the shared `@id`s (`#person`, `#website`, `#nkchargehub`, `#thomulab`) so the graph stays
+   connected.
+4. Add a `.postcard` to the index (copy the existing one), add the URL to `public/sitemap.xml`,
+   add an `<item>` to `public/blog/feed.xml`, and list it under "Writing" in `public/llms.txt`.
+5. Update the `blogPost` array in the index's JSON-LD, and the "Latest post" link in
+   `src/partials/nav.html` if it should point at the new one.
+
+`dateModified` must change whenever you edit a post — that date is what shows readers (and search
+engines) that a correction was made.
+
+### Editorial rules for posts
+
+- **No invented numbers.** The first post states plainly which figures are deliberately not
+  published. Keep doing that: if a number is not confirmed, say it is not published rather than
+  estimating.
+- **No firsts, no superlatives, no named partners or customers** unless they can be verified.
+- Write in the first person about work that actually happened. If a section is speculation, label it.
+- Images are illustrative: caption them as concepts if they are not photographs of the real thing.
+- Corrections are edits with a new `dateModified`, not silent rewrites.

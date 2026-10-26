@@ -49,6 +49,13 @@ business owner, founder, builder and technology / AI enthusiast from Thodupuzha,
 - **Digital Headquarters** — *current*. This website: static, dependency-free, self-hosted fonts,
   JSON-LD structured data, no third-party requests.
 
+## Writing
+
+- Blog index: https://georgesthomas.com/blog/ (RSS: https://georgesthomas.com/blog/feed.xml)
+- "What Building an EV Charging Station Actually Taught Me" (2026-10-26) — notes from building NKT
+  Charge Hub in Thodupuzha: site choice, 90 kW DC / CCS2 / OCPP specification, uptime, load and
+  monitoring. Contains no utilisation, revenue or pricing figures.
+
 ## Other interests
 
 Gaming and gaming hardware, 3D printing and CAD, photography and creator technology (including Sony
@@ -86,6 +93,7 @@ No phone number, private address or other social profile is published.
 - Technology: https://georgesthomas.com/technology/
 - Projects: https://georgesthomas.com/projects/
 - Lifestyle (THOMU MODE): https://georgesthomas.com/lifestyle/
+- Writing: https://georgesthomas.com/blog/
 - Contact: https://georgesthomas.com/contact/
 - Privacy: https://georgesthomas.com/privacy/
 - Terms: https://georgesthomas.com/terms/

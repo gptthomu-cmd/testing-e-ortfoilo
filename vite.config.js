@@ -17,6 +17,8 @@ const pages = {
   myAiOs: resolve(root, 'my-ai-os/index.html'),
   technology: resolve(root, 'technology/index.html'),
   projects: resolve(root, 'projects/index.html'),
+  blog: resolve(root, 'blog/index.html'),
+  blogPost: resolve(root, 'blog/building-nkt-charge-hub/index.html'),
   lifestyle: resolve(root, 'lifestyle/index.html'),
   contact: resolve(root, 'contact/index.html'),
   privacy: resolve(root, 'privacy/index.html'),
@@ -69,13 +71,18 @@ function htmlPartials() {
         return html
           .replace(/<!--\s*page:[a-z0-9-]+\s*-->/g, '')
           .replace(/\{\{page\}\}/g, slug)
-          .replace(/\{\{active-if:([a-z0-9-]+)\}\}/g, (m, key) => (key === slug ? 'is-active' : ''))
-          .replace(/\{\{aria-if:([a-z0-9-]+)\}\}/g, (m, key) =>
-            key === slug ? 'aria-current="page"' : ''
+          .replace(/\{\{active-if:([a-z0-9,-]+)\}\}/g, (m, keys) =>
+            keys.split(',').includes(slug) ? 'is-active' : ''
+          )
+          .replace(/\{\{aria-if:([a-z0-9,-]+)\}\}/g, (m, keys) =>
+            keys.split(',').includes(slug) ? 'aria-current="page"' : ''
           )
           // tidy the empty attributes left behind by non-matching tokens
           .replace(/\sclass=""/g, '')
-          .replace(/\saria-current=""(?=\s|>)/g, '');
+          .replace(/\s+aria-current=""(?=\s)/g, '')
+          .replace(/\s+aria-current=""/g, '')
+          // an emptied token leaves a double space between attributes
+          .replace(/(<[a-z][^<>]*)\s{2,}/g, '$1 ');
       }
     }
   };

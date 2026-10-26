@@ -41,6 +41,7 @@ Every page is a real, static, indexable HTML file at a clean URL:
 | `/blog/building-nkt-charge-hub/` | Post | First article, with `BlogPosting` schema |
 | `/lifestyle/` | THOMU MODE | Wealth systems and the future stack — every line labelled |
 | `/contact/` | Contact | Contact card, what to write about, what never to send |
+| `/sitemap/` | Sitemap | Every page and machine file on one screen |
 | `/privacy/`·`/terms/` | Legal | Plain-language privacy policy and terms of use |
 | `/404.html` | Not found | Served for unknown URLs by the host |
 
@@ -51,7 +52,8 @@ Every page is a real, static, indexable HTML file at a clean URL:
 ```
 index.html                  homepage: semantic markup, SEO meta, JSON-LD
 about/  nkt-group/  nkt-charge-hub/  thomu-lab/  apex-creator-os/
-my-ai-os/  technology/  projects/  lifestyle/  contact/  privacy/  terms/
+my-ai-os/  technology/  projects/  lifestyle/  sitemap/
+contact/  privacy/  terms/
                             one index.html per page (folder = clean URL)
 blog/index.html             writing index
 blog/building-nkt-charge-hub/  first post (one folder per post)
@@ -89,10 +91,13 @@ public/
   img/                      hero, EV, homelab, gaming, 3D printing, photography + OG cover
   favicon.svg, apple-touch-icon.png, icon-192/512.png, site.webmanifest
   robots.txt, sitemap.xml, llms.txt
-  _headers                  caching + security headers (Netlify/Cloudflare)
+  humans.txt                who built this, and what it is made of
+  .well-known/security.txt  how to report a security problem (RFC 9116)
+  _headers                  caching + security headers, expanded at build time
   _redirects                301s and the 404 route (Netlify/Cloudflare)
 docs/CONTENT.md             how to update copy, statuses, projects and pages
 docs/SEARCH-CONSOLE.md      verification, indexing, monitoring playbook
+docs/SECURITY.md            the CSP, the headers, and how to move hosts
 ```
 
 ### The partials system (no plugin dependency)
@@ -182,7 +187,17 @@ navigation (everywhere else).
   fully readable and navigable with JS disabled.
 - The hero canvas animation is capped at ~32 fps, pauses when off-screen or when the tab is
   hidden, and renders a single static frame for reduced-motion users.
-- No analytics, tag manager, pixels, cookies or third-party requests of any kind.
+- Zero third-party requests by default: no tag manager, no pixels, no cookies.
+- Google Analytics 4 is wired up but silent — it loads only after you press *Accept*, and only
+  once a real Measurement ID replaces the placeholder in `src/partials/head.html`.
+
+## Security
+
+`public/_headers` carries cache rules plus security headers for every path; a build-time plugin
+(`securityHeaders` in `vite.config.js`) expands them and computes a
+**Content-Security-Policy with a SHA-256 hash for every inline script** — so no `'unsafe-inline'`
+for scripts, and nothing runs unless this build produced it. Full explanations, the
+nginx/Apache equivalents and the two deliberate exceptions are in **`docs/SECURITY.md`**.
 
 ## Accessibility
 
@@ -225,8 +240,14 @@ My_AI_OS. Nothing unrelated is associated.
 today, what is planned, the status vocabulary and every page URL — linked from `<head>` as an
 alternate.
 
-**Crawling:** `robots.txt` allows everything public and points at `sitemap.xml`, which lists all
-fourteen indexable URLs (images included) — `404.html` is intentionally excluded and `noindex`.
+**Crawling:** `robots.txt` allows everything public, names the AI crawlers explicitly (search and
+retrieval bots — OAI-SearchBot, ChatGPT-User, Claude, Perplexity — are allowed so the site can be
+cited; training crawlers are allowed too, and one commented flip turns them off), and points at
+`sitemap.xml`, which lists every indexable URL with images — `404.html` is excluded and `noindex`.
+
+**Machine-readable files:** `/sitemap.xml`, `/robots.txt`, `/llms.txt` (a curated map for language
+models), `/humans.txt`, `/.well-known/security.txt` and `/blog/feed.xml`. All of them are linked
+from the human-readable `/sitemap/`.
 
 **Verification, analytics and monitoring:** `docs/SEARCH-CONSOLE.md` is the full playbook —
 how to verify the property, submit the sitemap, request indexing, read index-coverage and

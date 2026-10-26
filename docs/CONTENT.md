@@ -307,3 +307,47 @@ engines) that a correction was made.
 - Write in the first person about work that actually happened. If a section is speculation, label it.
 - Images are illustrative: caption them as concepts if they are not photographs of the real thing.
 - Corrections are edits with a new `dateModified`, not silent rewrites.
+
+---
+
+## 13. The sitemap page and the machine-readable files
+
+`/sitemap/` is a human-readable list of every page plus every machine file. It exists because a
+footer is good for people who know what they are looking for and bad for everyone else — and
+because "more than one way to find a page" is an accessibility requirement, not a nicety.
+
+**When you add a page**, add it to the right group in `sitemap/index.html` as well as to the
+footer and `sitemap.xml`. The groups are: Identity & work, NKT Group, THOMU LAB, Legal, and
+"For crawlers, apps & AI".
+
+### The files behind the site
+
+| File | What it is | Maintenance |
+|---|---|---|
+| `public/sitemap.xml` | Every indexable URL with `lastmod`, `changefreq`, `priority`; images carry `image:image` | Add an entry for every new page; update `lastmod` when a page genuinely changes |
+| `public/robots.txt` | Crawler policy, with AI search and training bots named explicitly | Only if you decide to block something |
+| `public/llms.txt` | Plain-text map of the site for language models | Update when a page is added or a fact changes |
+| `public/humans.txt` | Who built the site, what it is made of, what it refuses to do | Update the "Last update" line when you touch it |
+| `public/.well-known/security.txt` | RFC 9116 security contact | **`Expires:` must stay in the future** — refresh it yearly or it is ignored |
+| `public/blog/feed.xml` | RSS 2.0 feed for new writing | Add an `<item>` per post |
+| `public/_headers` | Cache + security rules (security block expanded at build time) | Rarely; see `docs/SECURITY.md` |
+| `public/_redirects` | 301s and the 404 route | When a URL changes |
+
+### AI crawlers
+
+`robots.txt` currently allows both kinds of bot:
+
+- **Retrieval bots** (OAI-SearchBot, ChatGPT-User, Claude-SearchBot / Claude-User,
+  PerplexityBot / Perplexity-User) fetch a page to answer a question, with a citation. Always
+  allow these — they are how the site gets quoted.
+- **Training crawlers** (GPTBot, ClaudeBot, CCBot) crawl to train models. Blocking them does
+  **not** remove you from AI answers; it is a reach decision, not a ranking one.
+
+To opt out of training, change the three `Allow: /` lines under "AI training crawlers" to
+`Disallow: /` and leave the retrieval bots alone.
+
+### After any build
+
+The CSP in `dist/_headers` is regenerated from your HTML, so it never goes stale as long as you
+deploy `dist/`. If a browser console reports a blocked inline script after you hand-edit HTML,
+run `npm run build` and redeploy — the new hash is in that build.

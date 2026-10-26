@@ -1,11 +1,72 @@
+# =============================================================================
 # George S. Thomas — digital headquarters
-# Allow legitimate crawling of every public page.
+#
+# Every page here is public by intent, so nothing is hidden from crawlers.
+# This file names the crawlers explicitly rather than relying on the wildcard,
+# because 2026 answer engines (ChatGPT, Perplexity, Claude, Google AI) use
+# their own user agents — and a wildcard Allow is easy for a host or CDN to
+# override by accident.
+#
+# Two kinds of bot:
+#   · retrieval bots — fetch a page to answer a question, with a citation.
+#     These you always want. They are the new search traffic.
+#   · training bots — crawl to train models. Allowing them is a reach
+#     decision, not a ranking one; blocking them does NOT remove you from
+#     AI answers. To opt out of training, change the three Allow lines under
+#     "AI training crawlers" to Disallow.
+# =============================================================================
 
+# ── Everyone else ────────────────────────────────────────────────────────────
 User-agent: *
 Allow: /
-
-# Nothing private is published, so nothing needs blocking. Kept explicit anyway.
 Disallow: /src/
 Disallow: /node_modules/
 
+# ── AI search + assistant crawlers (allow: they cite you) ────────────────────
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# ── AI training crawlers (allow; flip to Disallow to opt out) ────────────────
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# ── Conventional search ──────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ── Index files ──────────────────────────────────────────────────────────────
+# sitemap.xml — for crawlers. llms.txt — a curated map for language models.
 Sitemap: https://georgesthomas.com/sitemap.xml

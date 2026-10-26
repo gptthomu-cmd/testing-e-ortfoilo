@@ -1,6 +1,7 @@
-import { readFileSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { resolve, dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { defineConfig } from 'vite';
 
 const root = dirname(fileURLToPath(import.meta.url));
@@ -23,6 +24,7 @@ const pages = {
   contact: resolve(root, 'contact/index.html'),
   privacy: resolve(root, 'privacy/index.html'),
   terms: resolve(root, 'terms/index.html'),
+  sitemap: resolve(root, 'sitemap/index.html'),
   notFound: resolve(root, '404.html')
 };
 
@@ -88,9 +90,106 @@ function htmlPartials() {
   };
 }
 
+/**
+ * Security headers — with a Content-Security-Policy whose script hashes are
+ * computed from the HTML that was actually built.
+ *
+ * The site is static, so a strict policy is realistic: nothing third-party is
+ * in the page, and analytics stay off until you consent. Allowing
+ * 'unsafe-inline' for scripts would make the policy decorative, so instead
+ * every inline script (the JSON-LD, the two small bootstrap snippets) is
+ * hashed at build time. Edit an inline script and the next build writes a new
+ * hash; nothing is allowed unless this build produced it.
+ *
+ * public/_headers carries a `# [security]` marker in each rule; this plugin
+ * replaces every marker with the full security block.
+ */
+function securityHeaders() {
+  const walk = (dir) =>
+    readdirSync(dir).flatMap((entry) => {
+      const full = join(dir, entry);
+      return statSync(full).isDirectory() ? walk(full) : [full];
+    });
+
+  const inlineHashes = (html) => {
+    const hashes = new Set();
+    for (const match of html.matchAll(/<script(?![^>]*\ssrc=)[^>]*>([\s\S]*?)<\/script>/g)) {
+      const body = match[1];
+      if (!body.trim()) continue; // empty blocks cannot run anything
+      hashes.add(`'sha256-${createHash('sha256').update(body, 'utf8').digest('base64')}'`);
+    }
+    return hashes;
+  };
+
+  const csp = (hashes) =>
+    [
+      "default-src 'self'",
+      `script-src 'self'${hashes.map((hash) => ` ${hash}`).join('')} https://www.googletagmanager.com`,
+      // inline style="…" on the decorative layers; CSS itself is bundled
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https://www.google-analytics.com",
+      "font-src 'self'",
+      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
+      "media-src 'self'",
+      "manifest-src 'self'",
+      "frame-src 'none'",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "object-src 'none'",
+      'upgrade-insecure-requests'
+    ].join('; ');
+
+  return {
+    name: 'thomu:security-headers',
+    apply: 'build',
+    enforce: 'post',
+    closeBundle() {
+      const out = resolve(root, 'dist');
+      let headers;
+      try {
+        headers = readFileSync(resolve(out, '_headers'), 'utf8');
+      } catch {
+        console.warn('[security] dist/_headers not found — security block not written');
+        return;
+      }
+
+      const hashes = new Set();
+      const pages = walk(out).filter((file) => file.endsWith('.html'));
+      for (const file of pages) {
+        for (const hash of inlineHashes(readFileSync(file, 'utf8'))) hashes.add(hash);
+      }
+
+      const block = [
+        'X-Content-Type-Options: nosniff',
+        'Referrer-Policy: strict-origin-when-cross-origin',
+        'X-Frame-Options: SAMEORIGIN',
+        'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
+        'Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), usb=(), xr-spatial-tracking=()',
+        'Cross-Origin-Opener-Policy: same-origin',
+        'Cross-Origin-Resource-Policy: same-origin',
+        `Content-Security-Policy: ${csp([...hashes].sort())}`
+      ]
+        .map((line) => `  ${line}`)
+        .join('\n');
+
+      const rules = (headers.match(/^  # \[security\]$/gm) ?? []).length;
+      if (!rules) {
+        console.warn('[security] no # [security] marker found in _headers');
+        return;
+      }
+
+      writeFileSync(resolve(out, '_headers'), headers.replace(/^  # \[security\]$/gm, block));
+      console.log(
+        `[security] CSP with ${hashes.size} script hash(es) applied to ${rules} header rule(s)`
+      );
+    }
+  };
+}
+
 export default defineConfig({
   // Static, dependency-free site — the source tree is the app.
-  plugins: [htmlPartials()],
+  plugins: [htmlPartials(), securityHeaders()],
   build: {
     target: 'es2020',
     cssCodeSplit: false,

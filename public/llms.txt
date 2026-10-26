@@ -72,6 +72,15 @@ Nothing on the site should be summarised as operational if it is labelled Planne
 Vision, and no wishlist item should be described as owned. The open-source project index is
 intentionally empty — no repositories are listed before they exist publicly.
 
+## Machine-readable files
+
+- sitemap.xml — every indexable URL with last-modified dates
+- robots.txt — crawler policy (AI search and training bots named explicitly)
+- llms.txt — this file
+- humans.txt — who built the site and what it is made of
+- security.txt (/.well-known/) — how to report a security issue
+- /blog/feed.xml — RSS 2.0 feed for new writing
+
 ## Contact
 
 - Email: gdrivegeorge@gmail.com (the only public email; a contact address only)
@@ -95,5 +104,6 @@ No phone number, private address or other social profile is published.
 - Lifestyle (THOMU MODE): https://georgesthomas.com/lifestyle/
 - Writing: https://georgesthomas.com/blog/
 - Contact: https://georgesthomas.com/contact/
+- Sitemap (all pages in one list): https://georgesthomas.com/sitemap/
 - Privacy: https://georgesthomas.com/privacy/
 - Terms: https://georgesthomas.com/terms/

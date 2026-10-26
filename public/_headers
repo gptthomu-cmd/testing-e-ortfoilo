@@ -1,49 +1,80 @@
 # =============================================================================
-# Response headers — performance + security for static hosting.
+# Response headers — security + caching for static hosting.
 #
-# Supported by Netlify and Cloudflare Pages out of the box. On other hosts,
-# copy these rules into nginx / Apache / your CDN config.
+# Understood by Netlify and Cloudflare Pages as-is. On nginx, Apache or any
+# other host, copy these rules into the server config (see docs/SECURITY.md).
 #
-# Why this matters for Core Web Vitals: content-hashed assets never change, so
-# a one-year immutable cache removes an entire round trip for returning
-# visitors (LCP). HTML is revalidated so an edit goes live immediately.
+# ── Why the security block is repeated in every rule ────────────────────────
+# Hosts disagree, and have changed over time, about what happens when two
+# rules match the same path: some apply only the first match, others merge
+# them. Repeating the security headers inside each rule makes the result the
+# same either way. The block is written once, here, as the "# [security]"
+# marker below and expanded at build time by the security-headers
+# plugin in vite.config.js (which also fills in the CSP script hashes).
+# ────────────────────────────────────────────────────────────────────────────
+# ── Caching, and why ────────────────────────────────────────────────────────
+# Hashed build assets never change, so a one-year immutable cache removes a
+# whole round trip for returning visitors (LCP). HTML is revalidated every
+# time, so an edit publishes instantly with no cache purge.
 # =============================================================================
 
-# Hashed build assets (JS + CSS): immutable, cache for a year
+# HTML documents — always revalidate so an edit goes live immediately
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  # [security]
+
+# Hashed build assets (JS + CSS) — immutable for a year
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
-  X-Content-Type-Options: nosniff
+  # [security]
 
-# Fonts are content-hashed by name and never change
+# Fonts are self-hosted and content-stable
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
-  X-Content-Type-Options: nosniff
+  # [security]
 
-# Images: long cache, safe to revalidate
+# Images — long cache, safe to revalidate
 /img/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
-  X-Content-Type-Options: nosniff
+  # [security]
 
-# Icons, manifest, crawler files
+# Icons and the app manifest
 /*.svg
   Cache-Control: public, max-age=604800
+  # [security]
+
 /*.png
   Cache-Control: public, max-age=604800
+  # [security]
+
 /*.webmanifest
   Cache-Control: public, max-age=3600
   Content-Type: application/manifest+json
+  # [security]
+
+# Crawler and identity files
 /robots.txt
   Cache-Control: public, max-age=3600
+  # [security]
+
 /sitemap.xml
   Cache-Control: public, max-age=3600
+  # [security]
+
 /llms.txt
   Cache-Control: public, max-age=3600
+  # [security]
 
-# HTML: always revalidate so edits publish instantly
-/*
-  Cache-Control: public, max-age=0, must-revalidate
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  X-Frame-Options: SAMEORIGIN
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+/humans.txt
+  Cache-Control: public, max-age=3600
+  # [security]
+
+/.well-known/*
+  Cache-Control: public, max-age=3600
+  # [security]
+
+# Feeds
+/blog/feed.xml
+  Cache-Control: public, max-age=3600
+  # [security]

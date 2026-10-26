@@ -149,3 +149,21 @@ html.reduce-motion .hero__mesh { display: none; }
   .btn, .chip, .panel, .labcard, .projcard, .hero-card, .evcard { border: 1px solid ButtonBorder; }
   .status { border: 1px solid ButtonBorder; }
 }
+
+/* ==========================================================================
+   WCAG 2.2 — 2.5.8 TARGET SIZE (MINIMUM)
+   Every pointer target is at least 24 × 24 CSS px, or has 24 px of spacing
+   around it. Links inside a sentence are exempt by the criterion; navigation
+   lists are not — so the small chrome controls get a floor here.
+   ========================================================================== */
+
+.footer__nav a,
+.crumbs a,
+.consent__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.feedlink,
+.motiontoggle { min-height: 24px; }
